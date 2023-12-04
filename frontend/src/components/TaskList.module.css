@@ -1,0 +1,21 @@
+.title {
+  font: var(--font-heading);
+}
+
+ul {
+  list-style-type: none;
+}
+
+.itemContainer {
+  height: 100%;
+  width: 100%;
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.taskListContainer {
+  margin-top: 3rem;
+}

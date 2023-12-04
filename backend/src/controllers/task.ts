@@ -81,3 +81,33 @@ export const removeTask: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateTask: RequestHandler = async (req, res, next) => {
+  //Check custom validator for issues with the request
+  const errors = validationResult(req);
+
+  //retrieve the id from the request
+  const { id } = req.params;
+
+  try {
+    // throws anything found in errors. no errors, no problems
+    validationErrorParser(errors);
+
+    if (req.params.id !== req.body._id) {
+      // request url does not match updated task data
+      res.status(400);
+    }
+
+    // update task and obtain query of the original task
+    const found_task = await TaskModel.findByIdAndUpdate(id, req.body, { returnDocument: "after" });
+
+    if (found_task === null) {
+      // task not found with that id
+      res.status(404);
+    }
+
+    res.status(200).json(found_task);
+  } catch (error) {
+    next(error);
+  }
+};
