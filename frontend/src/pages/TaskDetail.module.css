@@ -1,0 +1,72 @@
+.title {
+  font: var(--font-heading);
+}
+
+.description {
+  font: var(--font-body);
+}
+
+.label {
+  font: var(--font-label);
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 2rem;
+  margin-top: 2rem;
+}
+
+.titleContainer {
+  width: 50%;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.titleContainer span {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.descriptionContainer {
+  height: fit-content;
+  display: flex;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 2rem;
+  margin-top: 2rem;
+}
+
+.infoRow label {
+  height: 100%;
+  align-items: flex-start;
+  display: flex;
+}
+
+.infoContainer {
+  height: 100%;
+  flex-grow: 1;
+  align-items: flex-start;
+  display: flex;
+  overflow: hidden;
+}
+.infoContainer span {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

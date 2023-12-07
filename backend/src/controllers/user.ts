@@ -10,7 +10,7 @@ export const getUser: RequestHandler = async (req, res, next) => {
   try {
     const user = await UserModel.findById(id);
     if (user === null) {
-      createHttpError(404, "User not found.");
+      throw createHttpError(404, "User not found.");
     }
 
     res.status(200).json(user);

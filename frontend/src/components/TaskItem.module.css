@@ -8,6 +8,15 @@
   column-gap: 0.25rem;
 }
 
+.textContainer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .textContainer {
   height: 100%;
   flex-grow: 3;

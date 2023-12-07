@@ -27,13 +27,12 @@ import validationErrorParser from "src/util/validationErrorParser";
  */
 export const getTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
-
   try {
     // if the ID doesn't exist, then findById returns null
     const task = await TaskModel.findById(id);
 
     if (task === null) {
-      throw createHttpError(404, "Task not found.");
+      throw createHttpError(404, "Task not found at id " + id);
     }
 
     // Populate assignee field, if it exists
@@ -116,7 +115,7 @@ export const updateTask: RequestHandler = async (req, res, next) => {
       // task not found with that id
       res.status(404);
     }
-    // Populate assignee field, if it exists
+    // Repopulate assignee field, if it exists
     else if (found_task.assignee !== null) {
       found_task.populate("assignee");
     }
