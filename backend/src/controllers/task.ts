@@ -29,15 +29,15 @@ export const getTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   try {
     // if the ID doesn't exist, then findById returns null
-    const task = await TaskModel.findById(id);
+    let task = await TaskModel.findById(id);
 
     if (task === null) {
       throw createHttpError(404, "Task not found at id " + id);
     }
 
     // Populate assignee field, if it exists
-    if (task.assignee !== null) {
-      task.populate("assignee");
+    if (task.assignee) {
+      task = await task.populate("assignee");
     }
 
     // Set the status code (200) and body (the task object as JSON) of the response.
@@ -59,7 +59,7 @@ export const createTask: RequestHandler = async (req, res, next) => {
     // if there are errors, then this function throws an exception
     validationErrorParser(errors);
 
-    const task = await TaskModel.create({
+    let task = await TaskModel.create({
       title: title,
       description: description,
       isChecked: isChecked,
@@ -68,8 +68,8 @@ export const createTask: RequestHandler = async (req, res, next) => {
     });
 
     // Populate assignee field, if it exists
-    if (task.assignee !== null) {
-      task.populate("assignee");
+    if (task.assignee) {
+      task = await task.populate("assignee");
     }
 
     // 201 means a new resource has been created successfully
@@ -109,18 +109,16 @@ export const updateTask: RequestHandler = async (req, res, next) => {
     }
 
     // update task and obtain query of the original task
-    const found_task = await TaskModel.findByIdAndUpdate(id, req.body, { returnDocument: "after" });
+    const new_task = await TaskModel.findByIdAndUpdate(id, req.body, {
+      returnDocument: "after",
+    }).populate("assignee");
 
-    if (found_task === null) {
+    if (new_task === null) {
       // task not found with that id
       res.status(404);
     }
-    // Repopulate assignee field, if it exists
-    else if (found_task.assignee !== null) {
-      found_task.populate("assignee");
-    }
 
-    res.status(200).json(found_task);
+    res.status(200).json(new_task);
   } catch (error) {
     next(error);
   }

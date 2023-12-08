@@ -72,7 +72,7 @@ export interface UpdateTaskRequest {
   description?: string;
   isChecked: boolean;
   dateCreated: Date;
-  asignee?: string;
+  assignee?: string;
 }
 
 /**
@@ -90,7 +90,6 @@ export async function createTask(task: CreateTaskRequest): Promise<APIResult<Tas
 }
 
 export async function getTask(id: string): Promise<APIResult<Task>> {
-  console.log("I exist");
   try {
     const response = await get(`/api/task/${id}`);
     const json = (await response.json()) as TaskJSON;

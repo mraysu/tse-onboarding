@@ -8,6 +8,10 @@
   column-gap: 0.25rem;
 }
 
+.item:hover {
+  background-color: var(--color-surface);
+}
+
 .textContainer a {
   color: inherit;
   text-decoration: none;
@@ -19,6 +23,8 @@ a:hover {
 
 .textContainer {
   height: 100%;
+  width: 50%;
+  max-width: none;
   flex-grow: 3;
   display: flex;
   flex-direction: column;
@@ -44,4 +50,13 @@ a:hover {
 
 .checked {
   color: var(--color-text-secondary);
+}
+
+.userTag {
+  width: 12rem;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 1rem;
 }

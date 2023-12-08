@@ -11,7 +11,7 @@ const taskSchema = new Schema({
   // will automatically get "serialized" into a standard date string.
   dateCreated: { type: Date, required: true },
 
-  assignee: { type: Schema.Types.ObjectId, ref: "User" },
+  assignee: { type: Schema.Types.ObjectId, ref: "User", required: false },
 });
 
 type Task = InferSchemaType<typeof taskSchema>;
