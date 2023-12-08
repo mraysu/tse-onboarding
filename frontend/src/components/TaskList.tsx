@@ -18,7 +18,7 @@ export function TaskList({ title }: TaskListProps) {
         alert(result.error);
       }
     });
-  });
+  }, []);
 
   return (
     <div className={styles.taskListContainer}>
